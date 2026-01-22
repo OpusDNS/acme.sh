@@ -177,7 +177,7 @@ _get_zone() {
       page_zones=$(echo "$response" | grep -oE '"name"[[:space:]]*:[[:space:]]*"[^"\\]*"' | sed 's/"name"[[:space:]]*:[[:space:]]*"\([^"\\]*\)"/\1/' | sed 's/\.$//')
       has_next=$(echo "$response" | grep -oE '"has_next_page"[[:space:]]*:[[:space:]]*(true|false)' | grep -o 'true\|false')
     fi
-    
+
     # Append zones from this page
     if [ -n "$page_zones" ]; then
       if [ -z "$zones" ]; then
@@ -187,7 +187,7 @@ _get_zone() {
 $page_zones"
       fi
     fi
-    
+
     # Check if there are more pages
     if [ "$has_next" = "true" ]; then
       page=$((page + 1))
@@ -233,7 +233,7 @@ $page_zones"
     _record_name="${domain%"${_zone}"}"
     _record_name="${_record_name%.}"
   fi
-  
+
   if [ -z "$_record_name" ]; then
     _record_name="@"
   fi
@@ -339,7 +339,7 @@ _opusdns_wait_for_propagation() {
     _debug "Propagation check attempt $attempt/$max_attempts"
 
     all_propagated=1
-    
+
     # Check all OpusDNS authoritative nameservers
     for ns in $nameservers; do
       if _exists dig; then
